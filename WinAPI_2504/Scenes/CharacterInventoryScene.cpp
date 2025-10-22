@@ -35,4 +35,10 @@ void CharacterInventoryScene::GUIRender()
 {
 	naruto->Edit();
 	inventoryManager->GUIRender();
+
+	if (ImGui::Button("save")) {
+		inventoryManager->SaveData();
+	}
+
+
 }

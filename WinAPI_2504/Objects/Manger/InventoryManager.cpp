@@ -23,7 +23,7 @@ void InventoryManager::InitializeDB()
         cerr << "Can't open database: " << sqlite3_errmsg(db) << endl;
         return;
     }
-
+    /*
     char* errMsg = nullptr;
     const char* create_sql =
         "CREATE TABLE IF NOT EXISTS Items ("
@@ -51,6 +51,7 @@ void InventoryManager::InitializeDB()
         cerr << "SQL error: " << errMsg << endl;
         sqlite3_free(errMsg);
     }
+    */
 }
 
 void InventoryManager::LoadData()

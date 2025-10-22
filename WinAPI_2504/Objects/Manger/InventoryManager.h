@@ -24,11 +24,11 @@ public:
     ~InventoryManager();
 
     void GUIRender();
+    void SaveData();
 
 private:
     void InitializeDB();
     void LoadData();
-    void SaveData();
 
     void RenderInventoryWindow();
     void RenderEquipmentWindow();
