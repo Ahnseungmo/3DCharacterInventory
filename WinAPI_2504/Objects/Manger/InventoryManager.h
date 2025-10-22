@@ -1,11 +1,6 @@
 #pragma once
 
 #include "Framework.h"
-#include "sqlite3.h"
-#include <string>
-#include <vector>
-#include <map>
-
 
 struct ItemData {
     int id;

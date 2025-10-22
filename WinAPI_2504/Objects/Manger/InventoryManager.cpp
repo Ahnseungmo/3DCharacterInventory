@@ -178,13 +178,13 @@ void InventoryManager::RenderInventoryWindow()
         if (ImGui::BeginDragDropTarget()) {
             if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("INVENTORY_ITEM")) {
                 int source_idx = *(const int*)payload->Data;
-                std::swap(inventory[i], inventory[source_idx]);
+                swap(inventory[i], inventory[source_idx]);
             }
             // 장비창에서 해제하는 경우
             if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("EQUIPMENT_ITEM")) {
                 string* source_slot_ptr = (string*)payload->Data;
                 if (inventory[i].item_id == -1) { // 빈 슬롯에만 해제 가능
-                    std::swap(inventory[i], equipment[*source_slot_ptr]);
+                    swap(inventory[i], equipment[*source_slot_ptr]);
                 }
             }
             ImGui::EndDragDropTarget();
@@ -247,7 +247,7 @@ void InventoryManager::RenderEquipmentWindow()
 
                 if (item_to_equip.item_data && item_to_equip.item_data->equip_slot == slot_name) {
                     // 장비 교체
-                    std::swap(equipment[slot_name], inventory[source_idx]);
+                    swap(equipment[slot_name], inventory[source_idx]);
                 }
             }
             ImGui::EndDragDropTarget();
