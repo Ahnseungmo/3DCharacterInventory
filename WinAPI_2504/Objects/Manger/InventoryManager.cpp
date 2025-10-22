@@ -38,6 +38,7 @@ void InventoryManager::InitializeDB()
         "    equip_slot TEXT PRIMARY KEY, item_id INTEGER,"
         "    FOREIGN KEY (item_id) REFERENCES Items(id)"
         ");"
+
         // --- 샘플 데이터 추가 ---
         "INSERT OR IGNORE INTO Items (id, name, type, equip_slot, description) VALUES "
         "(1, 'Sword', 'Weapon', 'Weapon', 'light one hand sword'),"
@@ -72,7 +73,7 @@ void InventoryManager::LoadData()
     }
     sqlite3_finalize(stmt);
 
-    // Load Inventory
+
     inventory.assign(20, ItemSlot()); // 20칸 인벤토리
     const char* sql_inv = "SELECT slot_index, item_id, quantity FROM Inventory;";
     if (sqlite3_prepare_v2(db, sql_inv, -1, &stmt, 0) == SQLITE_OK) {
@@ -123,7 +124,7 @@ void InventoryManager::SaveData()
     sqlite3_exec(db, "DELETE FROM Equipment;", 0, 0, 0);
     const char* sql_equip = "INSERT INTO Equipment (equip_slot, item_id) VALUES (?, ?);";
     if (sqlite3_prepare_v2(db, sql_equip, -1, &stmt, 0) != SQLITE_OK) return;
-    // C++11 호환을 위해 구조적 바인딩을 사용하지 않는 코드로 수정합니다.
+
     for (map<string, ItemSlot>::const_iterator it = equipment.begin(); it != equipment.end(); ++it) {
         const string& slot = it->first;
         const ItemSlot& item_slot = it->second;
@@ -166,14 +167,14 @@ void InventoryManager::RenderInventoryWindow()
             ImGui::Button("Empty", button_size);
         }
 
-        // Drag Source: 인벤토리에서 아이템 드래그 시작
+        // 아이템 드래그 시작
         if (slot.item_id != -1 && ImGui::BeginDragDropSource()) {
             ImGui::SetDragDropPayload("INVENTORY_ITEM", &i, sizeof(int));
             ImGui::Text("%s", slot.item_data->name.c_str());
             ImGui::EndDragDropSource();
         }
 
-        // Drop Target: 다른 슬롯으로 아이템 드롭
+        // 다른 슬롯으로 아이템 드롭
         if (ImGui::BeginDragDropTarget()) {
             if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("INVENTORY_ITEM")) {
                 int source_idx = *(const int*)payload->Data;
@@ -215,7 +216,6 @@ void InventoryManager::RenderEquipmentWindow()
     ImVec2 button_size(80, 80);
     vector<string> slot_names = { "Weapon", "Helmet", "Chest", "Legs", "Boots" };
 
-    // C++11 호환을 위해 range-based for loop을 일반 for loop으로 수정합니다.
     for (size_t i = 0; i < slot_names.size(); ++i) {
         const string& slot_name = slot_names[i];
         ImGui::PushID(slot_name.c_str());
@@ -230,7 +230,7 @@ void InventoryManager::RenderEquipmentWindow()
             ImGui::Button(slot_name.c_str(), button_size);
         }
 
-        // Drag Source: 장비창에서 아이템 드래그 시작 (해제)
+        // 장비창에서 아이템 드래그 시작 (해제)
         if (slot.item_id != -1 && ImGui::BeginDragDropSource()) {
             static string dragged_slot;
             dragged_slot = slot_name;
@@ -239,7 +239,7 @@ void InventoryManager::RenderEquipmentWindow()
             ImGui::EndDragDropSource();
         }
 
-        // Drop Target: 인벤토리에서 아이템 드롭 (장착)
+        //인벤토리에서 아이템 드롭 (장착)
         if (ImGui::BeginDragDropTarget()) {
             if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("INVENTORY_ITEM")) {
                 int source_idx = *(const int*)payload->Data;

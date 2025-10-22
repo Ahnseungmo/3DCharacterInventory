@@ -6,17 +6,16 @@
 #include <vector>
 #include <map>
 
-// 아이템 마스터 정보 구조체
+
 struct ItemData {
     int id;
     string name;
     string type;
     string equip_slot; // 장착 부위. 비어있으면 장착 불가
     string description;
-    // ImTextureID icon_texture; // 아이콘 텍스처 ID (추후 로드)
+    // ImTextureID icon_texture; // 아이콘 텍스처 ID 
 };
 
-// 인벤토리/장비 슬롯 정보 구조체
 struct ItemSlot {
     int item_id = -1; // -1은 빈 슬롯
     int quantity = 0;
