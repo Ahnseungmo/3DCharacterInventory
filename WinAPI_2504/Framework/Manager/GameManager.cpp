@@ -22,11 +22,11 @@ GameManager::GameManager()
 	//SCENE->AddScene("Game", new SphereScene());
 	//SCENE->AddScene("Game", new BlockScene());
 	//SCENE->AddScene("Game", new LightScene());
-	//SCENE->AddScene("Export", new ModelExportScene());
+	SCENE->AddScene("Export", new ModelExportScene());
 	//SCENE->AddScene("Game", new ModelRenderScene());
-	//SCENE->AddScene("Game", new ModelAnimationScene());
+	SCENE->AddScene("Game", new ModelAnimationScene());
 	//SCENE->AddScene("Game", new CharacterScene());
-	SCENE->AddScene("Game", new CharacterInventoryScene());
+	//SCENE->AddScene("Game", new CharacterInventoryScene());
 
 	SCENE->ChangeScene("Game");
 }

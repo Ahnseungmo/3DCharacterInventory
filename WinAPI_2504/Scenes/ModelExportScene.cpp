@@ -3,8 +3,11 @@
 
 ModelExportScene::ModelExportScene()
 {
-	string name = "Sword";
-	string file = "Resources/Models/FBX/" + name + ".obj";
+//	string name = "Naruto";
+	string name = "LowPolyCharacter";
+//	string file = "Resources/Models/FBX/" + name + ".obj";
+	string file = "Resources/Models/FBX/" + name + ".fbx";
+
 	ModelExporter* exporter;
 
 	exporter = new ModelExporter(name, file);
