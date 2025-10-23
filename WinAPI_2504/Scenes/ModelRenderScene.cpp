@@ -3,7 +3,7 @@
 
 ModelRenderScene::ModelRenderScene()
 {
-	model = new Model("LowPolyCharacter");
+	model = new Model("Character");
 }
 
 ModelRenderScene::~ModelRenderScene()
