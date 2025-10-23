@@ -125,6 +125,7 @@ typedef function<void()> Event;
 
 #include "Framework/Model/ModelData.h"
 #include "Framework/Model/ModelExporter.h"
+#include "Framework/Model/ModularModelExporter.h"
 #include "Framework/Model/ModelMesh.h"
 #include "Framework/Model/ModelClip.h"
 

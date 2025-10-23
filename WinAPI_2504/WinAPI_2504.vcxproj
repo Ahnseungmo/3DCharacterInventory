@@ -159,6 +159,7 @@
     <ClInclude Include="Framework\Model\ModelData.h" />
     <ClInclude Include="Framework\Model\ModelExporter.h" />
     <ClInclude Include="Framework\Model\ModelMesh.h" />
+    <ClInclude Include="Framework\Model\ModularModelExporter.h" />
     <ClInclude Include="Framework\Render\Material.h" />
     <ClInclude Include="Framework\Render\Mesh.h" />
     <ClInclude Include="Framework\Render\RenderTarget.h" />
@@ -218,6 +219,7 @@
     <ClInclude Include="Scenes\ModelAnimaionScene.h" />
     <ClInclude Include="Scenes\ModelExportScene.h" />
     <ClInclude Include="Scenes\ModelRenderScene.h" />
+    <ClInclude Include="Scenes\ModularModelExportScene.h" />
     <ClInclude Include="Scenes\Scene.h" />
     <ClInclude Include="Scenes\SphereScene.h" />
     <ClInclude Include="Scenes\TutorialScene.h" />
@@ -242,6 +244,7 @@
     <ClCompile Include="Framework\Model\ModelClip.cpp" />
     <ClCompile Include="Framework\Model\ModelExporter.cpp" />
     <ClCompile Include="Framework\Model\ModelMesh.cpp" />
+    <ClCompile Include="Framework\Model\ModularModelExporter.cpp" />
     <ClCompile Include="Framework\Render\Material.cpp" />
     <ClCompile Include="Framework\Render\RenderTarget.cpp" />
     <ClCompile Include="Framework\Render\Texture.cpp" />
@@ -298,6 +301,7 @@
     <ClCompile Include="Scenes\ModelAnimaionScene.cpp" />
     <ClCompile Include="Scenes\ModelExportScene.cpp" />
     <ClCompile Include="Scenes\ModelRenderScene.cpp" />
+    <ClCompile Include="Scenes\ModularModelExportScene.cpp" />
     <ClCompile Include="Scenes\SphereScene.cpp" />
     <ClCompile Include="Scenes\TutorialScene.cpp" />
     <ClCompile Include="sqlite3.c">

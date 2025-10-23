@@ -7,6 +7,7 @@
 #include "Scenes/BlockScene.h"
 #include "Scenes/LightScene.h"
 #include "Scenes/ModelExportScene.h"
+#include "Scenes/ModularModelExportScene.h"
 #include "Scenes/ModelRenderScene.h"
 #include "Scenes/ModelAnimaionScene.h"
 #include "Scenes/CharacterScene.h"
@@ -21,14 +22,15 @@ GameManager::GameManager()
 	//SCENE->AddScene("Game", new CollisionScene());
 	//SCENE->AddScene("Game", new SphereScene());
 	//SCENE->AddScene("Game", new BlockScene());
-	//SCENE->AddScene("Game", new LightScene());
-	SCENE->AddScene("Export", new ModelExportScene());
+	//SCENE->AddScene("Game", new LightScene());	
 	//SCENE->AddScene("Game", new ModelRenderScene());
-	SCENE->AddScene("Game", new ModelAnimationScene());
+	//SCENE->AddScene("Game", new ModelAnimationScene());
 	//SCENE->AddScene("Game", new CharacterScene());
 	//SCENE->AddScene("Game", new CharacterInventoryScene());
+	//SCENE->AddScene("Export", new ModelExportScene());
+	SCENE->AddScene("ModularExport", new ModularModelExportScene());
 
-	SCENE->ChangeScene("Game");
+	SCENE->ChangeScene("ModularExport");
 }
 
 GameManager::~GameManager()
