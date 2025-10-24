@@ -4,6 +4,10 @@
 ModelRenderScene::ModelRenderScene()
 {
 	model = new Model("Character");
+	
+//	model->SetShader(L"Model/ModelPalette.hlsl");
+//	model->SetShader();
+
 }
 
 ModelRenderScene::~ModelRenderScene()
