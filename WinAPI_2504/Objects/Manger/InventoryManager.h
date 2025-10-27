@@ -42,4 +42,5 @@ private:
     map<int, ItemData> all_items; // 게임 내 모든 아이템 정보
     vector<ItemSlot> inventory;   // 플레이어 인벤토리
     map<string, ItemSlot> equipment; // 플레이어 장비
+
 };

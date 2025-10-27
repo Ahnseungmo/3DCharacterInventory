@@ -498,6 +498,7 @@
     <FxCompile Include="Resources\Shaders\Light\Light.hlsl" />
     <FxCompile Include="Resources\Shaders\Model\Model.hlsl" />
     <FxCompile Include="Resources\Shaders\Model\ModelPalette.hlsl" />
+    <FxCompile Include="Resources\Shaders\Light\LightPalette.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\VertexHeader.hlsli" />

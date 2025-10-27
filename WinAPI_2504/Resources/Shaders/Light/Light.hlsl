@@ -48,4 +48,5 @@ float4 PS(LightPixelInput input) : SV_TARGET
     }
     
     return ambient + color + emissive;
+
 }

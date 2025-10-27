@@ -5,6 +5,7 @@ Character::Character()
 	tag = "CharacterCapsule";
 
 	model = new ModelAnimator("Character");
+//	model->SetShader(L"Light/LightPalette.hlsl");
 	model->ReadClip("Idle");
 	model->ReadClip("Run");
 	model->ReadClip("Attack");
