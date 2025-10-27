@@ -4,8 +4,8 @@
 ModelAnimationScene::ModelAnimationScene()
 {
 //	model = new ModelAnimator("Naruto");
-	model = new ModelAnimator("LowPolyCharacter");
-	model->SetVertexShader(L"Model/Model.hlsl");
+	model = new ModelAnimator("Character");
+//	model->SetVertexShader(L"Model/ModelPalette.hlsl");
 
 	//model->ReadClip("Attack", 1);
 	model->ReadClip("Idle", 0);

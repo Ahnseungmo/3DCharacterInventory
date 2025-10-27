@@ -156,6 +156,7 @@ typedef function<void()> Event;
 #include "Objects/Game/Sword.h"
 
 #include "Objects/Character/Naruto.h"
+#include "Objects/Character/Character.h"
 
 #include "Scenes/Scene.h"
 #include "Framework/Manager/SceneManager.h"

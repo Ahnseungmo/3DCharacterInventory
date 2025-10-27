@@ -3,17 +3,29 @@
 
 CharacterScene::CharacterScene()
 {
-	naruto = new Naruto();
+	sword1 = new Sword();
+	sword2 = new Sword();
+	character = new Character();
+
+	character->ChangeSword(sword1);
 }
 
 CharacterScene::~CharacterScene()
 {
-	delete naruto;
+	delete character;
 }
 
 void CharacterScene::Update()
 {
-	naruto->Update();
+	if (Input::Get()->IsKeyDown('1')) {
+		character->ChangeSword(sword1);
+	}
+	if (Input::Get()->IsKeyDown('2')) {
+		character->ChangeSword(sword2);
+
+	}
+
+	character->Update();
 }
 
 void CharacterScene::PreRender()
@@ -22,7 +34,7 @@ void CharacterScene::PreRender()
 
 void CharacterScene::Render()
 {
-	naruto->Render();
+	character->Render();
 }
 
 void CharacterScene::PostRender()
@@ -31,5 +43,5 @@ void CharacterScene::PostRender()
 
 void CharacterScene::GUIRender()
 {
-	naruto->Edit();
+	character->Edit();
 }

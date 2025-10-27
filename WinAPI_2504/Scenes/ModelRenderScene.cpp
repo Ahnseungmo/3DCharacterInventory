@@ -3,9 +3,11 @@
 
 ModelRenderScene::ModelRenderScene()
 {
-	model = new Model("Character");
+//	model = new Model("Character");
 	
-//	model->SetShader(L"Model/ModelPalette.hlsl");
+	model = new Model("Naruto");
+	//	model->SetShader(L"Model/ModelPalette.hlsl");
+//	model->SetShader(L"Light/Light.hlsl");
 //	model->SetShader();
 
 }
