@@ -13,6 +13,10 @@ public:
 	void GUIRender() override;
 
 private:
-	Naruto* naruto;
+	Character* character;
+
+	Sword* sword1;
+	Sword* sword2;
+
 	InventoryManager* inventoryManager;
 };

@@ -3,19 +3,31 @@
 
 CharacterInventoryScene::CharacterInventoryScene()
 {
-	naruto = new Naruto();
+	sword1 = new Sword();
+	sword2 = new Sword();
+	character = new Character();
+
+	character->ChangeSword(sword1);
 	inventoryManager = new InventoryManager("inventory.db");
 }
 
 CharacterInventoryScene::~CharacterInventoryScene()
 {
-	delete naruto;
+	delete character;
 	delete inventoryManager;
 }
 
 void CharacterInventoryScene::Update()
 {
-	naruto->Update();
+	if (Input::Get()->IsKeyDown('1')) {
+		character->ChangeSword(sword1);
+	}
+	if (Input::Get()->IsKeyDown('2')) {
+		character->ChangeSword(sword2);
+
+	}
+
+	character->Update();
 }
 
 void CharacterInventoryScene::PreRender()
@@ -24,7 +36,7 @@ void CharacterInventoryScene::PreRender()
 
 void CharacterInventoryScene::Render()
 {
-	naruto->Render();
+	character->Render();
 }
 
 void CharacterInventoryScene::PostRender()
@@ -33,7 +45,7 @@ void CharacterInventoryScene::PostRender()
 
 void CharacterInventoryScene::GUIRender()
 {
-	naruto->Edit();
+	character->Edit();
 	inventoryManager->GUIRender();
 
 	if (ImGui::Button("save")) {

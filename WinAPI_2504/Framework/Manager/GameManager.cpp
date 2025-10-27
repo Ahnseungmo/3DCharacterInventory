@@ -25,8 +25,8 @@ GameManager::GameManager()
 	//SCENE->AddScene("Game", new LightScene());	
 	//SCENE->AddScene("Game", new ModelRenderScene());
 	//SCENE->AddScene("Game", new ModelAnimationScene());
-	SCENE->AddScene("Game", new CharacterScene());
-	//SCENE->AddScene("Game", new CharacterInventoryScene());
+	//SCENE->AddScene("Game", new CharacterScene());
+	SCENE->AddScene("Game", new CharacterInventoryScene());
 	//SCENE->AddScene("Export", new ModelExportScene());
 	//SCENE->AddScene("ModularExport", new ModularModelExportScene());
 	//SCENE->AddScene("Game", new ModelRenderScene());
