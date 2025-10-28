@@ -17,11 +17,15 @@ private:
 	void ReadMaterial();
 	void ReadMesh();
 
+	void SaveDialog();
+
 protected:
 	string name;
 
 	vector<Material*> materials;
 	vector<ModelMesh*> meshes;
+	vector<bool> meshesActive;
+
 	vector<NodeData> nodes;
 	vector<BoneData> bones;
 

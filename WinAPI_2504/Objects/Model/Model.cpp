@@ -25,8 +25,20 @@ void Model::Render()
 	worldBuffer->Set(world);
 	worldBuffer->SetVS(0);
 
-	for (ModelMesh* mesh : meshes)
+	for (int i = 0;i < meshes.size();i++) {
+		if (meshesActive.at(i)) {
+			meshes.at(i)->Render();
+		}
+	
+	}
+
+	/*
+	
+	for (ModelMesh* mesh : meshes) {
 		mesh->Render();
+	}
+
+	*/
 }
 
 void Model::Edit()
@@ -35,6 +47,14 @@ void Model::Edit()
 
 	for (Material* material : materials)
 		material->Edit();
+
+	for (int i = 0;i < meshes.size();i++) {
+		bool isChecked = meshesActive.at(i);
+		if (ImGui::Checkbox(meshes.at(i)->GetData().name.c_str(), &isChecked)) {
+			meshesActive.at(i) = isChecked;
+		}
+
+	}
 }
 
 void Model::SetShader(wstring file)
@@ -131,5 +151,43 @@ void Model::ReadMesh()
 		boneMap[bone.name] = bone.index;
 	}
 
+	meshesActive.resize(meshes.size());
+	for (auto meshActive : meshesActive) {
+		meshActive = true;
+	}
 	delete reader;
+}
+
+
+void Model::SaveDialog()
+{
+	string key = "Save";
+/*
+	if (ImGui::Button("Save"))
+	{
+		if (file.empty())
+			Save("Resources/Materials/" + name + ".mat");
+		else
+			Save(file);
+	}
+
+	ImGui::SameLine();
+
+	if (ImGui::Button("SaveAs"))
+		DIALOG->OpenDialog(key.c_str(), key.c_str(), ".mat");
+
+	if (DIALOG->Display(key.c_str()))
+	{
+		if (DIALOG->IsOk())
+		{
+			string file = DIALOG->GetFilePathName();
+
+			file = file.substr(projectPath.size() + 1, file.size());
+
+			Save(file);
+		}
+
+		DIALOG->Close();
+	}
+	*/
 }

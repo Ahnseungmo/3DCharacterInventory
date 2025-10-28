@@ -5,7 +5,8 @@ ModelRenderScene::ModelRenderScene()
 {
 //	model = new Model("Character");
 	
-	model = new Model("Naruto");
+//	model = new Model("Naruto");
+	model = new Model("LowPolyCharacter");
 	//	model->SetShader(L"Model/ModelPalette.hlsl");
 //	model->SetShader(L"Light/Light.hlsl");
 //	model->SetShader();

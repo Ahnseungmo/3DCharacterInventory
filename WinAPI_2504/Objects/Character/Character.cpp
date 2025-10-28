@@ -4,8 +4,9 @@ Character::Character()
 {
 	tag = "CharacterCapsule";
 
-	model = new ModelAnimator("Character");
-//	model->SetShader(L"Light/LightPalette.hlsl");
+	model = new ModelAnimator("LowPolyCharacter");
+//	model = new ModelAnimator("Character");
+	//	model->SetShader(L"Light/LightPalette.hlsl");
 	model->ReadClip("Idle");
 	model->ReadClip("Run");
 	model->ReadClip("Attack");
@@ -17,8 +18,8 @@ Character::Character()
 	model->GetClip(Attack)->SetEvent(bind(&Character::EndAttack, this), 0.9f);
 
 //	sword = new Sword();
-
 	rightHand = new Transform();
+//	rightHand->SetParent(this);
 
 //	sword->SetParent(rightHand);
 }
@@ -33,6 +34,7 @@ Character::~Character()
 void Character::Update()
 {
 	rightHand->SetWorld(model->GetTransformByNode(36));
+//	rightHand->SetWorld(model->GetTransformByNode(28));
 
 	Move();
 	StartAttack();

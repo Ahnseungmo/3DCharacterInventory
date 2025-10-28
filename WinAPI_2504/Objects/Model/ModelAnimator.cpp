@@ -3,9 +3,9 @@
 ModelAnimator::ModelAnimator(string name)
 	: Model(name)
 {
-//    SetVertexShader(L"Model/Model.hlsl");
+    SetVertexShader(L"Model/Model.hlsl");
 //    SetVertexShader(L"Model/ModelPalette.hlsl");
-    SetShader(L"Model/ModelPalette.hlsl");
+//    SetShader(L"Model/ModelPalette.hlsl");
 
 	frameBuffer = new FrameBuffer();
 }

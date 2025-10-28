@@ -5,8 +5,9 @@ ModelExportScene::ModelExportScene()
 {
 	
 //	string name = "Naruto";
-	string name = "Character";
-//	string file = "Resources/Models/FBX/" + name + ".obj";
+//	string name = "Character";
+	string name = "LowPolySword";
+	//	string file = "Resources/Models/FBX/" + name + ".obj";
 	string file = "Resources/Models/FBX/" + name + ".fbx";
 
 	ModelExporter* exporter;
@@ -16,8 +17,7 @@ ModelExportScene::ModelExportScene()
 	exporter->ExportMesh();
 	delete exporter;
 
-	
-
+	/*
 	string clipName = "Attack";
 	file = "Resources/Models/Animations/" + name + "/" + clipName + ".fbx";
 	
@@ -38,6 +38,7 @@ ModelExportScene::ModelExportScene()
 	exporter = new ModelExporter(name, file);
 	exporter->ExportClip(clipName);
 	delete exporter;
+	*/
 
 }
 
