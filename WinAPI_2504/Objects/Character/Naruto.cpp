@@ -20,6 +20,8 @@ Naruto::Naruto()
 	rightHand = new Transform();
 
 	sword->SetParent(rightHand);
+
+	//CAM->SetTarget(this);
 }
 
 Naruto::~Naruto()
@@ -55,7 +57,7 @@ void Naruto::Edit()
 	Transform::Edit();
 	model->Edit();
 
-	sword->Edit();
+	sword->Edit();	
 }
 
 void Naruto::Move()
@@ -67,7 +69,8 @@ void Naruto::Move()
 
 	if (Input::Get()->IsKeyPress('W'))
 	{
-		moveDir += Vector3::Forward();
+		//moveDir += Vector3::Forward();
+		moveDir += GetForward();
 	}
 	else if (Input::Get()->IsKeyPress('S'))
 	{
@@ -83,11 +86,17 @@ void Naruto::Move()
 		moveDir += Vector3::Right();
 	}
 
+	Vector3 delta = mousePos - prevMousePos;
+	prevMousePos = mousePos;
+
+	localRotation.y += delta.x * rotateSpeed * DELTA;
+	//CAM->Rotate(Vector3::Right(), -delta.y * rotateSpeed * DELTA);
+
 	if (moveDir.Length() > 0.0f)
 	{
 		moveDir.Normalize();	
 		Translate(moveDir * moveSpeed * DELTA);
-		Rotate();
+		//Rotate();
 
 		PlayClip(Run);
 	}

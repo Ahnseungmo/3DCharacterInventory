@@ -33,7 +33,7 @@ void ModularModelExportScene::GUIRender()
 
 	if (ImGui::Button("Open FBX File"))
 	{
-		DIALOG->OpenDialog("ChooseFBXForModular", "Choose a FBX File", ".fbx");
+		DIALOG->OpenDialog("ChooseFBXForModular", "Choose a FBX File", ".*[Ff][Bb][Xx]");
 	}
 
 
@@ -98,7 +98,7 @@ void ModularModelExportScene::GUIRender()
 			}
 		}
 
-		if (!selectedIndices.empty() && strlen(partName) > 0 && strcmp(partName, "PartName") != 0)
+		if (!selectedIndices.empty() && strlen(partName) > 0/*&& strcmp(partName, "PartName") != 0*/)
 		{
 			exporter->ExportMeshPart(partName, selectedIndices);
 		}

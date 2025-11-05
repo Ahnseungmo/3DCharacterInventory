@@ -16,6 +16,7 @@
 #define MAX_LIGHT 16
 #define MAX_FRAME 256
 #define MAX_BONE 256
+#define MAX_INSTANCE 128
 
 #define FOR(n) for(int i = 0 ; i < n ; i++)
 
@@ -43,8 +44,7 @@
 #include <d3d11.h>
 #include <d3dcompiler.h>
 #include <DirectXMath.h>
-
-#include "sqlite3.h"
+#include <DirectXCollision.h>
 
 #pragma comment(lib, "d3d11.lib")
 #pragma comment(lib, "d3dcompiler.lib")
@@ -77,6 +77,7 @@
 
 using namespace std;
 using namespace DirectX;
+using namespace DirectX::TriangleTests;
 
 typedef XMFLOAT4 Float4;
 typedef XMFLOAT3 Float3;
@@ -106,28 +107,38 @@ typedef function<void()> Event;
 #include "Framework/Shader/Shader.h"
 #include "Framework/Shader/VertexShader.h"
 #include "Framework/Shader/PixelShader.h"
+#include "Framework/Shader/ComputeShader.h"
+#include "Framework/Shader/GeometryShader.h"
 
 #include "Framework/Buffer/VertexLayouts.h"
 #include "Framework/Buffer/VertexBuffer.h"
 #include "Framework/Buffer/IndexBuffer.h"
 #include "Framework/Buffer/ConstBuffer.h"
+#include "Framework/Buffer/StructuredBuffer.h"
 #include "Framework/Buffer/GlobalBffer.h"
 
 #include "Framework/Stats/RasterizerState.h"
+#include "Framework/Stats/DepthStencilState.h"
+#include "Framework/Stats/BlendState.h"
+#include "Framework/Stats/SamplerState.h"
 
 #include "Framework/Render/Texture.h"
 #include "Framework/Render/Mesh.h"
 #include "Framework/Render/Material.h"
+#include "Framework/Render/DepthStencil.h"
 #include "Framework/Render/RenderTarget.h"
 
 #include "Framework/Environment/Camera.h"
 #include "Framework/Environment/Environment.h"
+#include "Framework/Environment/Reflection.h"
+#include "Framework/Environment/Refraction.h"
+#include "Framework/Environment/Shadow.h"
 
 #include "Framework/Model/ModelData.h"
 #include "Framework/Model/ModelExporter.h"
-#include "Framework/Model/ModularModelExporter.h"
 #include "Framework/Model/ModelMesh.h"
 #include "Framework/Model/ModelClip.h"
+#include "Framework/Model/ModularModelExporter.h"
 
 #include "Objects/Basic/GameObject.h"
 #include "Objects/Basic/Quad.h"
@@ -140,30 +151,40 @@ typedef function<void()> Event;
 #include "Objects/Collider/BoxCollider.h"
 #include "Objects/Collider/SphereCollider.h"
 #include "Objects/Collider/CapsuleCollider.h"
-#include "Objects/Collider/MeshCollider.h"
-
 
 #include "Objects/Model/Model.h"
 #include "Objects/Model/ModelAnimator.h"
+#include "Objects/Model/ModelInstancing.h"
+#include "Objects/Model/ModelAnimatorInstancing.h"
 
 #include "Objects/Manger/DataManager.h"
 #include "Objects/Manger/EventManager.h"
-#include "Objects/Manger/InventoryManager.h"
+
+#include "Objects/Landscape/Skybox.h"
+#include "Objects/Landscape/Terrain.h"
+#include "Objects/Landscape/TerrainEditor.h"
+#include "Objects/Landscape/Water.h"
+
+#include "Objects/Particle/Particle.h"
+#include "Objects/Particle/Sprite.h"
+#include "Objects/Particle/Rain.h"
+#include "Objects/Particle/Snow.h"
+#include "Objects/Particle/Spark.h"
+#include "Objects/Particle/ParticleSystem.h"
 
 #include "Objects/Game/GameBall.h"
 #include "Objects/Game/Block.h"
 #include "Objects/Game/Steve.h"
 #include "Objects/Game/Sword.h"
+#include "Objects/Game/InteriorObject.h"
+#include "Objects/Game/InteriorManager.h"
+
 
 #include "Objects/Character/Naruto.h"
-#include "Objects/Character/Character.h"
 
 #include "Scenes/Scene.h"
 #include "Framework/Manager/SceneManager.h"
 #include "Framework/Manager/GameManager.h"
-
-
-
 
 extern HWND hWnd;
 extern Vector3 mousePos;

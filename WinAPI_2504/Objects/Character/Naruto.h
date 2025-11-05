@@ -40,4 +40,6 @@ private:
 	Sword* sword;
 
 	Transform* rightHand;
+
+	Vector3 prevMousePos;
 };

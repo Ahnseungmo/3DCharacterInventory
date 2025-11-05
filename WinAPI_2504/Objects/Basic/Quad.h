@@ -11,6 +11,7 @@ public:
 	~Quad();
 
 	void Render();	
+	void RenderInstanced(UINT count);
 
 	Vector2 GetSize() const { return size; }
 

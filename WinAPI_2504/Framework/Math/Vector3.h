@@ -56,6 +56,9 @@ public:
 
     void operator*=(const float& s) { value *= s; }
     void operator/=(const float& s) { value /= s; }
+    
+    Vector3 operator* (const Matrix& matrix) const { return XMVector3TransformCoord(value, matrix); }
+    void operator*= (const Matrix& matrix) { value = XMVector3TransformCoord(value, matrix); }
         
     friend void operator+=(Float3& v1, const Vector3& v2)
     {

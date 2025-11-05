@@ -6,25 +6,42 @@ RenderTarget::RenderTarget(UINT width, UINT height)
     CreateRTVTexture();
     CreateRTV();
     CreateSRV();
-    CreateProjection();
 }
 
 RenderTarget::~RenderTarget()
 {
     rtvTexture->Release();
     rtv->Release();
-
-    delete projectionBuffer;
+    srv->Release();
 }
 
-void RenderTarget::Set(Float4 clearColor)
+void RenderTarget::Set(DepthStencil* depthStencil, Float4 clearColor)
 {
-    DC->OMSetRenderTargets(1, &rtv, nullptr);
+    ID3D11ShaderResourceView* srv = nullptr;
+    DC->PSSetShaderResources(0, 1, &srv);
+
+    DC->OMSetRenderTargets(1, &rtv, depthStencil->GetDSV());
 
     DC->ClearRenderTargetView(rtv, (float*)&clearColor);
+    depthStencil->Clear();
 
+    Environment::Get()->SetRender();
     Environment::Get()->SetViewport(width, height);
-    projectionBuffer->SetVS(2);
+}
+
+void RenderTarget::SetMulti(RenderTarget** targets, UINT count, DepthStencil* depthStencil, Float4 clearColor)
+{
+    vector<ID3D11RenderTargetView*> rtvs;
+
+    FOR(count)
+    {
+        rtvs.push_back(targets[i]->GetRTV());
+        DC->ClearRenderTargetView(rtvs.back(), (float*)&clearColor);
+    }
+    depthStencil->Clear();
+
+    DC->OMSetRenderTargets(count, rtvs.data(), depthStencil->GetDSV());
+    Environment::Get()->SetRender();
 }
 
 void RenderTarget::CreateRTVTexture()
@@ -37,7 +54,7 @@ void RenderTarget::CreateRTVTexture()
     desc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
     desc.SampleDesc.Count = 1;
     desc.Usage = D3D11_USAGE_DEFAULT;
-    desc.BindFlags = D3D11_BIND_SHADER_RESOURCE | D3D11_BIND_RENDER_TARGET;
+    desc.BindFlags = D3D11_BIND_RENDER_TARGET | D3D11_BIND_SHADER_RESOURCE;
 
     DEVICE->CreateTexture2D(&desc, nullptr, &rtvTexture);
 }
@@ -53,19 +70,10 @@ void RenderTarget::CreateRTV()
 
 void RenderTarget::CreateSRV()
 {
-    D3D11_SHADER_RESOURCE_VIEW_DESC desc = {};
-    desc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
-    desc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
-    desc.Texture2D.MipLevels = 1;
+    D3D11_SHADER_RESOURCE_VIEW_DESC srvDesc = {};
+    srvDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
+    srvDesc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
+    srvDesc.Texture2D.MipLevels = 1;
 
-    DEVICE->CreateShaderResourceView(rtvTexture, &desc, &srv);
-}
-
-void RenderTarget::CreateProjection()
-{
-    Matrix orthographic = XMMatrixOrthographicOffCenterLH(
-        0.0f, width, 0.0f, height, -1.0f, 1.0f);
-
-    projectionBuffer = new MatrixBuffer();
-    projectionBuffer->Set(orthographic);
+    DEVICE->CreateShaderResourceView(rtvTexture, &srvDesc, &srv);
 }

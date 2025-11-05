@@ -2,11 +2,12 @@
 
 class Plane : public GameObject
 {
-private:
+protected:
 	typedef VertexUVNormalTangent VertexType;
 
 public:
 	Plane(Vector2 size = Vector2(10, 10));
+	Plane(wstring heightMapFile);
 	~Plane();
 
 	void Render();
@@ -15,8 +16,9 @@ public:
 
 private:
 	void MakeMesh();
+	void MakeMesh(Texture* heightMap);
 
-private:
+protected:
 	Vector2 size;
 
 	Mesh<VertexType>* mesh;

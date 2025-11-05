@@ -3,9 +3,8 @@
 Sword::Sword() : BoxCollider(Vector3(0.2f, 0.5f, 3.5f))
 {
 	tag = "SwordCollider";
-//	model = new Model("Sword");
-
-	model = new Model("LowPolySword");
+	
+	model = new Model("Sword");
 	model->SetParent(this);
 	model->Load();
 

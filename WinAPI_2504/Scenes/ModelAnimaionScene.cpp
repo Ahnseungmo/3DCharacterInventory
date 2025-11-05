@@ -3,9 +3,8 @@
 
 ModelAnimationScene::ModelAnimationScene()
 {
-//	model = new ModelAnimator("Naruto");
-	model = new ModelAnimator("Character");
-//	model->SetVertexShader(L"Model/ModelPalette.hlsl");
+	model = new ModelAnimator("Naruto");
+	model->SetVertexShader(L"Model/Model.hlsl");
 
 	//model->ReadClip("Attack", 1);
 	model->ReadClip("Idle", 0);

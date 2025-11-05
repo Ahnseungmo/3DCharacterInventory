@@ -147,6 +147,41 @@ bool BoxCollider::IsCapsuleCollision(CapsuleCollider* collider)
     return false;
 }
 
+void BoxCollider::FitSize(vector<ModelMesh*> meshes)
+{
+	if (meshes.empty()) return;
+
+	Vector3 minPos(FLT_MAX, FLT_MAX, FLT_MAX);
+	Vector3 maxPos(-FLT_MAX, -FLT_MAX, -FLT_MAX);
+
+	for (ModelMesh* mesh : meshes)
+	{
+		if (!mesh) continue;
+
+		const vector<ModelVertex>& vertices = mesh->GetData().vertices;
+
+		for (const ModelVertex& v : vertices)
+		{
+			Vector3 pos = v.pos;
+
+			minPos.x = min(minPos.x, pos.x);
+			minPos.y = min(minPos.y, pos.y);
+			minPos.z = min(minPos.z, pos.z);
+
+			maxPos.x = max(maxPos.x, pos.x);
+			maxPos.y = max(maxPos.y, pos.y);
+			maxPos.z = max(maxPos.z, pos.z);
+		}
+	}
+
+	size = maxPos - minPos;
+
+	Vector3 center = (minPos + maxPos) * 0.5f;
+//	SetLocalPosition(center);
+
+	UpdateMesh();
+}
+
 void BoxCollider::GetOBB(ObbDesc& desc)
 {	
 	desc.center = GetGlobalPosition();

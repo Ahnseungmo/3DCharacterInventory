@@ -4,9 +4,6 @@ ModelAnimator::ModelAnimator(string name)
 	: Model(name)
 {
     SetVertexShader(L"Model/Model.hlsl");
-//    SetVertexShader(L"Model/ModelPalette.hlsl");
-//    SetShader(L"Model/ModelPalette.hlsl");
-
 	frameBuffer = new FrameBuffer();
 }
 
@@ -26,7 +23,7 @@ ModelAnimator::~ModelAnimator()
 
 void ModelAnimator::Update()
 {
-    UpdateFrame();
+    UpdateFrame(frameBuffer->GetData());
     UpdateWorld();
 }
 
@@ -237,13 +234,11 @@ void ModelAnimator::CreateClipTransform(UINT index)
     }
 }
 
-void ModelAnimator::UpdateFrame()
+void ModelAnimator::UpdateFrame(Motion* motion)
 {
     if (!isPlay) return;
 
-    Motion* motion = frameBuffer->GetData();
-
-    {        
+    {
         Frame* frame = &motion->cur;
         ModelClip* clip = clips[frame->clip];
 
@@ -276,18 +271,18 @@ void ModelAnimator::UpdateFrame()
 
             motion->next.clip = -1;
             motion->next.curFrame = 0;
-			motion->next.time = 0.0f;
+            motion->next.time = 0.0f;
             return;
         }
 
-        frame->time += DELTA * clip->tickPerSecond * frame->scale;        
+        frame->time += DELTA * clip->tickPerSecond * frame->scale;
 
         if (frame->time >= 1.0f)
         {
             ++frame->curFrame %= clip->frameCount - 1;
             frame->time -= 1.0f;
         }
-    }    
+    }
 }
 
 UINT ModelAnimator::GetMaxFrameNum()

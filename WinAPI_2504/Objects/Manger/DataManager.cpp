@@ -7,7 +7,7 @@ DataManager::DataManager()
 DataManager::~DataManager()
 {
 }
-/*
+
 void DataManager::LoadData(const string& fileName)
 {
 	ifstream file(fileName);
@@ -43,4 +43,3 @@ void DataManager::LoadData(const string& fileName)
 	}
 	file.close();
 }
-*/

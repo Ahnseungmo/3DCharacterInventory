@@ -75,7 +75,7 @@ public:
 
 protected:
     void CreateClipTransform(UINT index);
-    void UpdateFrame();
+    void UpdateFrame(Motion* motion);
 
     UINT GetMaxFrameNum();
 

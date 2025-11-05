@@ -9,6 +9,8 @@ private:
 public:
 	void PSSet(UINT slot = 0);
 
+	void ReadPixels(vector<Float4>& pixels);
+
 	Vector2 GetSize()
 	{
 		return Vector2(image.GetMetadata().width, image.GetMetadata().height);
@@ -16,6 +18,7 @@ public:
 
 	wstring GetFile() { return file; }
 	ID3D11ShaderResourceView* GetSRV() { return srv; }
+
 
 public:
 	static Texture* Add(wstring file);

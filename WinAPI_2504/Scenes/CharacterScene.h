@@ -13,11 +13,6 @@ public:
 	void GUIRender() override;
 
 private:
-	Character* character;
-
-	Sword* sword1;
-	Sword* sword2;
-
-
-
+	Naruto* naruto;
+	ImFont* koreanFont;
 };

@@ -16,6 +16,12 @@ public:
 	void SetRender();
 	void SetPostRender();
 
+	void SetAlphaBlend(bool isAlpha);
+	void SetAdditive();
+	void SetAlphaToCoverage();
+	void SetDepthEnable(bool isDepthEnable);
+	void SetDepthWriteMask(D3D11_DEPTH_WRITE_MASK mask);
+
 	LightBuffer::Light* AddLight();
 
 	LightBuffer::Light* GetLight(UINT index) { return &lightBuffer->GetData()->lights[index]; }
@@ -26,7 +32,7 @@ public:
 private:
 	void CreateProjection();
 	void CreateSamplerState();
-	void CreateBlendState();
+	void CreateBlendState();	
 	void CreateStats();
 
 	void EditLight(LightBuffer::Light& light);
@@ -43,8 +49,9 @@ private:
 	MatrixBuffer* uiViewBuffer;
 	LightBuffer* lightBuffer;
 
-	ID3D11SamplerState* samplerState;
-	ID3D11BlendState* alphaBlendState;	
+	ID3D11SamplerState* samplerState;	
 
 	RasterizerState* rasterizerState[2];	
+	BlendState* blendState[3];
+	DepthStencilState* depthStencilState[3];
 };

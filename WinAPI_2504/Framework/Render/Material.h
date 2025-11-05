@@ -37,6 +37,7 @@ public:
 	Texture* GetDiffuseMap() { return diffuseMap; }
 
 	MaterialBuffer* GetBuffer() { return materialBuffer; }
+	MaterialBuffer::Data* GetData() { return materialBuffer->GetData(); }
 
 	string GetName() { return name; }
 	void SetName(string name) { this->name = name; }

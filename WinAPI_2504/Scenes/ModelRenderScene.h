@@ -14,4 +14,10 @@ public:
 
 private:
 	Model* model;
+	Model* model2;
+
+	Grid* grid;
+
+	BoxCollider* collider;
+
 };

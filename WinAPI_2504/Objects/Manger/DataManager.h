@@ -1,6 +1,5 @@
 #pragma once
 
-/*
 struct ItemData
 {
 	enum Type
@@ -15,7 +14,6 @@ struct ItemData
 	int value;
 	Type type;
 };
-*/
 
 class DataManager : public Singleton<DataManager>
 {
@@ -26,12 +24,12 @@ private:
 	~DataManager();
 
 public:
-//	void LoadData(const string& fileName);
+	void LoadData(const string& fileName);
 	
-//	ItemData GetItem(int key) { return itemDatas[key]; }
-//	int GetItemCount() { return itemDatas.size(); }
+	ItemData GetItem(int key) { return itemDatas[key]; }
+	int GetItemCount() { return itemDatas.size(); }
 
 private:
-//	unordered_map<int, ItemData> itemDatas;
+	unordered_map<int, ItemData> itemDatas;
 
 };

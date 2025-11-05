@@ -1,6 +1,6 @@
 #include "Framework.h"
 
-Quad::Quad(Vector2 size) : size(size)
+Quad::Quad(Vector2 size) : size(size), GameObject(L"Basic/Texture.hlsl")
 {
 	tag = "Quad";
 
@@ -32,6 +32,14 @@ void Quad::Render()
 
 	SetRender();
 	mesh->Draw();
+}
+
+void Quad::RenderInstanced(UINT count)
+{
+	if (!isActive) return;
+
+	SetRender();
+	mesh->DrawInstanced(count);
 }
 
 void Quad::MakeMesh()

@@ -11,7 +11,7 @@ Environment::Environment()
 
 	CreateProjection();
     CreateSamplerState();
-	//CreateBlendState();
+	CreateBlendState();
 	CreateStats();
 }
 
@@ -85,14 +85,18 @@ void Environment::SetViewport(UINT width, UINT height)
 
 void Environment::SetRender()
 {
+	mainCamera->SetView();
+
 	SetViewport();
 
 	projectionBuffer->Set(perspective);
 	projectionBuffer->SetVS(2);
 
 	rasterizerState[isWireFrame]->SetState();
+	blendState[0]->SetState();
+	depthStencilState[0]->SetState();
 
-	grid->Render();
+	//grid->Render();
 
 	lightBuffer->SetPS(1);
 }
@@ -103,6 +107,29 @@ void Environment::SetPostRender()
 
 	projectionBuffer->Set(orthographic);
 	projectionBuffer->SetVS(2);
+
+	blendState[1]->SetState();
+	depthStencilState[1]->SetState();
+}
+
+void Environment::SetAlphaBlend(bool isAlpha)
+{
+	blendState[2]->Alpha(isAlpha);
+	blendState[2]->AlphaToCoverage(false);
+	blendState[2]->SetState();
+}
+
+void Environment::SetAdditive()
+{
+	blendState[2]->Additive();
+	blendState[2]->AlphaToCoverage(false);
+	blendState[2]->SetState();
+}
+
+void Environment::SetAlphaToCoverage()
+{
+	blendState[2]->AlphaToCoverage(true);
+	blendState[2]->SetState();
 }
 
 LightBuffer::Light* Environment::AddLight()
@@ -145,22 +172,22 @@ void Environment::CreateSamplerState()
 
 void Environment::CreateBlendState()
 {
-	D3D11_BLEND_DESC desc = {};
-	desc.RenderTarget[0].BlendEnable = true;
-	desc.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;
-	desc.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA;
-	desc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
+	blendState[0] = new BlendState();
+	blendState[1] = new BlendState();
+	blendState[1]->Alpha(true);
+	blendState[2] = new BlendState();
+}
 
-	desc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_SRC_ALPHA;
-	desc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_INV_SRC_ALPHA;
-	desc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
+void Environment::SetDepthEnable(bool isDepthEnable)
+{
+	depthStencilState[2]->DepthEnable(isDepthEnable);
+	depthStencilState[2]->SetState();
+}
 
-	desc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
-
-	DEVICE->CreateBlendState(&desc, &alphaBlendState);
-
-	float blendFactor[4] = {};
-	DC->OMSetBlendState(alphaBlendState, blendFactor, 0xffffffff);
+void Environment::SetDepthWriteMask(D3D11_DEPTH_WRITE_MASK mask)
+{
+	depthStencilState[2]->DepthWriteMask(mask);
+	depthStencilState[2]->SetState();
 }
 
 void Environment::CreateStats()
@@ -168,6 +195,11 @@ void Environment::CreateStats()
 	rasterizerState[0] = new RasterizerState();
 	rasterizerState[1] = new RasterizerState();
 	rasterizerState[1]->FillMode(D3D11_FILL_WIREFRAME);
+
+	depthStencilState[0] = new DepthStencilState();
+	depthStencilState[1] = new DepthStencilState();
+	depthStencilState[1]->DepthEnable(false);
+	depthStencilState[2] = new DepthStencilState();
 }
 
 void Environment::EditLight(LightBuffer::Light& light)

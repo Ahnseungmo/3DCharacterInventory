@@ -20,7 +20,7 @@ public:
 	bool IsBoxCollision(BoxCollider* collider) override;
 	bool IsSphereCollision(SphereCollider* collider) override;
 	bool IsCapsuleCollision(CapsuleCollider* collider) override;
-
+	void FitSize(vector<ModelMesh*> meshes);
 	void GetOBB(ObbDesc& desc);
 
 private:

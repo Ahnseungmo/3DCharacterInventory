@@ -19,6 +19,8 @@ void ModelMesh::Render()
 
 void ModelMesh::RenderInstanced(UINT count)
 {
+	material->Set();
+	mesh->DrawInstanced(count);
 }
 
 void ModelMesh::CreateMesh(void* vertices, UINT vertexCount, void* indices, UINT indexCount)

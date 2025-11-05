@@ -25,7 +25,7 @@ class Collider : public GameObject
 protected:
 	enum class Type
 	{
-		Box, Sphere, Capsule, Mesh
+		Box, Sphere, Capsule
 	};
 
 public:
@@ -38,7 +38,7 @@ public:
 	virtual bool IsBoxCollision(class BoxCollider* collider) = 0;
 	virtual bool IsSphereCollision(class SphereCollider* collider) = 0;
 	virtual bool IsCapsuleCollision(class CapsuleCollider* collider) = 0;
-
+	void FitSize(vector<ModelMesh*> meshes);
 	void Render() override;
 
 private:

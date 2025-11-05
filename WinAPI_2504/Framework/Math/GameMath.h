@@ -8,6 +8,7 @@ public:
 
 	static int Random(const int& min, const int& max);
 	static float Random(const float& min, const float& max);
+	static Vector3 Random(const Vector3& min, const Vector3& max);
 
 	static float Clamp(const float& value, const float& min, const float& max);
 

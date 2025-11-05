@@ -8,10 +8,6 @@ struct Vertex//정점 : 3차원 공간에서의 한 점
         : x(x), y(y), z(z)
     {
     }
-public:
-    Vector3 ToVector3() const {
-        return Vector3(x,y,z);
-    }
 };
 
 struct VertexColor//정점 : 3차원 공간에서의 한 점
@@ -35,6 +31,10 @@ struct VertexUV//정점 : 3차원 공간에서의 한 점
 
     VertexUV(float x = 0, float y = 0, float z = 0, float u = 0, float v = 0)
 		: x(x), y(y), z(z), u(u), v(v)
+    {
+    }
+    VertexUV(Vector3 pos, Vector2 uv)
+        : x(pos.x), y(pos.y), z(pos.z), u(uv.x), v(uv.y)
     {
     }
 };
@@ -72,6 +72,18 @@ struct VertexUVNormalTangent
     }
 };
 
+struct VertexUVNormalAlpha
+{
+    Float3 pos = {};
+    Float2 uv = {};
+    Float3 normal = {};
+    float alpha[3] = {};
+
+    VertexUVNormalAlpha()
+    {
+    }
+};
+
 struct VertexUVNormalTangentBlend
 {
     Float3 pos = {};
@@ -94,7 +106,5 @@ struct VertexUVNormalTangentBlend
 struct InstanceData
 {
 	Matrix world;
-
-	Float2 curFrame;
-	Float2 maxFrame;
+    int index = 0;
 };
