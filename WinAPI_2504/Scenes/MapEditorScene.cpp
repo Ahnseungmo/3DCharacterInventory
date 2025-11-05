@@ -37,10 +37,11 @@ void MapEditorScene::Render()
 
 void MapEditorScene::PostRender()
 {
+
 }
 
 void MapEditorScene::GUIRender()
 {
-	
+	InteriorManager::Get()->Edit();
 
 }

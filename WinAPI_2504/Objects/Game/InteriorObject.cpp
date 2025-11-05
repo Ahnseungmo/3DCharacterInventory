@@ -9,6 +9,7 @@ InteriorObject::InteriorObject(string meshName)
 {
     model = new Model(meshName);
     model->SetParent(this);
+    FitSize(model->GetMeshes());
 }
 
 InteriorObject::~InteriorObject()
@@ -32,4 +33,9 @@ void InteriorObject::Render()
         BoxCollider::Render();
         model->Render();
     }
+}
+void InteriorObject::Edit()
+{
+    BoxCollider::Edit();
+    model->Edit();
 }

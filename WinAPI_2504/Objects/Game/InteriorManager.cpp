@@ -67,3 +67,12 @@ InteriorObject* InteriorManager::Add(string meshName, Vector3 position, Vector3 
     objects[meshName].push_back(obj);
     return obj;
 }
+
+
+void InteriorManager::Edit()
+{
+    for (auto const& pair : instancingModels)
+    {
+        pair.second->Edit();
+    }
+}
